@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 口语教练 - 专业的AI发音分析</title>
-    <meta name="description" content="专业的AI发音分析，让你的英语更地道。智能评估、实时反馈、个性化训练。">
+    <title>AI英语伙伴 - 让你轻松"说"英语的APP</title>
+    <meta name="description" content="不只是学习工具，更是陪伴你的贴心英语伙伴。24小时在线，随时随地想聊就聊，从害怕开口到自信表达。">
     
     <style>
         /* CSS 变量系统 */
@@ -534,8 +534,34 @@
         }
         
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+        
+        @keyframes slideInFromLeft {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInFromRight {
+            0% { transform: translateX(100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* 按钮悬停效果 */
+        .btn:hover .shimmer {
+            left: 100%;
         }
         
         /* 悬浮动画 */
@@ -646,6 +672,69 @@
             .faq-answer-content {
                 font-size: var(--text-base);
             }
+            
+            /* Disney风格网格的响应式布局 */
+            @media (max-width: 768px) {
+                .disney-grid {
+                    grid-template-columns: 1fr !important;
+                }
+                
+                .disney-grid > div[style*="grid-column: span 2"] {
+                    grid-column: span 1 !important;
+                }
+                
+                /* 场景网格移动端适配 */
+                .scenario-grid {
+                    grid-template-columns: 1fr 1fr !important;
+                    grid-template-rows: auto !important;
+                    gap: 15px !important;
+                }
+                
+                .scenario-grid > div {
+                    grid-column: auto !important;
+                    grid-row: auto !important;
+                    min-height: 120px !important;
+                }
+                
+                /* 练习方法网格移动端适配 */
+                .practice-methods-grid {
+                    grid-template-columns: 1fr !important;
+                    grid-template-rows: auto !important;
+                    gap: 15px !important;
+                }
+                
+                .practice-methods-grid > div {
+                    grid-column: auto !important;
+                    grid-row: auto !important;
+                    min-height: 100px !important;
+                }
+                
+                /* iPhone模拟界面移动端适配 */
+                .iphone-demo-grid {
+                    grid-template-columns: 1fr !important;
+                    gap: 30px !important;
+                }
+                
+                .iphone-mockup {
+                    width: 240px !important;
+                    height: 480px !important;
+                }
+                
+                .iphone-screen {
+                    padding: 15px !important;
+                }
+                
+                /* 网页模拟界面移动端适配 */
+                .web-demo-grid {
+                    grid-template-columns: 1fr !important;
+                    gap: 30px !important;
+                }
+                
+                .web-mockup {
+                    width: 320px !important;
+                    height: 400px !important;
+                }
+            }
         }
         
         @media (max-width: 375px) {
@@ -669,103 +758,884 @@
     <!-- 导航栏 -->
     <nav class="navbar" id="navbar">
         <div class="navbar-content">
-            <a href="#" class="navbar-logo">口语练习</a>
+            <a href="#" class="navbar-logo">AI英语伙伴</a>
             <ul class="navbar-nav">
                 <li><a href="#features">功能</a></li>
                 <li><a href="#pricing">价格</a></li>
                 <li><a href="#faq">支持</a></li>
             </ul>
-            <a href="#hero" class="navbar-cta">我要练习</a>
+            <a href="#hero" class="navbar-cta">免费体验</a>
         </div>
     </nav>
 
-    <!-- Hero 区域 -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">开口练英语</h1>
-            <p class="hero-subtitle">想学会就要多说话，自己掌控学习节奏</p>
-            <div class="hero-actions">
-                <a href="#features" class="btn btn-primary">开始练口语</a>
-                <a href="#features" class="btn btn-secondary">看练习方法</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 叙事分屏 1：AI实时分析 -->
-    <section class="narrative-section" id="features" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-        <div class="narrative-content">
-            <div class="narrative-image">
-                <div style="width: 100%; max-width: 280px; height: 200px; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); animation: shimmer 3s infinite;"></div>
-                    <div style="font-size: 28px; margin-bottom: 16px; z-index: 1;">🎤</div>
-                    <div style="font-size: 18px; text-align: center; opacity: 0.9; z-index: 1; line-height: 1.5; font-weight: 500;">
-                        <div style="margin-bottom: 8px;">✓ 发音准确度: 92%</div>
-                        <div style="margin-bottom: 8px;">✓ 语调自然度: 88%</div>
-                        <div>✓ 流畅度: 95%</div>
-                    </div>
+    <!-- Hero 区域 - 全新设计 -->
+    <section class="hero" id="hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); position: relative; overflow: hidden;">
+        <!-- 动态背景装饰 -->
+        <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px; animation: float 20s ease-in-out infinite; opacity: 0.3;"></div>
+        <div style="position: absolute; top: 10%; right: 10%; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; animation: pulse 4s ease-in-out infinite;"></div>
+        <div style="position: absolute; bottom: 20%; left: 15%; width: 60px; height: 60px; background: rgba(255,255,255,0.08); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
+        
+        <div class="hero-content" style="position: relative; z-index: 1;">
+            <!-- 新增：用户数量展示 -->
+            <div style="display: inline-flex; align-items: center; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 25px; padding: 8px 16px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.3);">
+                <div style="display: flex; margin-right: 8px;">
+                    <div style="width: 24px; height: 24px; background: #34c759; border-radius: 50%; margin-right: -6px; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 12px;">👤</div>
+                    <div style="width: 24px; height: 24px; background: #ff9500; border-radius: 50%; margin-right: -6px; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 12px;">👤</div>
+                    <div style="width: 24px; height: 24px; background: #007aff; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 12px;">👤</div>
                 </div>
+                <span style="color: white; font-size: 14px; font-weight: 600;">已有 10,000+ 用户选择我们</span>
             </div>
-            <div class="narrative-text" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
-                <h2 class="narrative-title" style="color: #667eea;">想说就说，随时练习</h2>
-                <p class="narrative-description">
-                    口语练习最重要的是开口说话。不管你的发音标不标准，
-                    语法对不对，先说出来再说。
+            
+            <!-- 优化后的标题 -->
+            <h1 class="hero-title" style="background: linear-gradient(45deg, #ffffff, #f0f8ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                让你轻松<span style="color: #ffd700; text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);">"说"</span>英语的AI伙伴
+            </h1>
+            
+            <!-- 新增：核心价值主张 -->
+            <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 16px; padding: 20px; margin: 32px 0; border: 1px solid rgba(255,255,255,0.2); max-width: 600px; margin-left: auto; margin-right: auto;">
+                <p style="color: white; font-size: 18px; font-weight: 500; line-height: 1.6; margin-bottom: 16px;">
+                    🎯 <strong>说更多，学更快</strong> - 从害怕开口到自信表达
                 </p>
-                <p class="narrative-description" style="margin-top: 16px;">
-                    你可以随时随地练习，想练多久练多久，完全由你自己决定。
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 叙事分屏 2：个性化陪练 -->
-    <section class="narrative-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-        <div class="narrative-content reverse">
-            <div class="narrative-text" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
-                <h2 class="narrative-title" style="color: #f5576c;">自己掌控练习进度</h2>
-                <p class="narrative-description">
-                    你想练什么就练什么，想从哪里开始就从哪里开始。
-                    日常对话、商务英语、旅游口语...完全由你选择。
-                </p>
-                <p class="narrative-description" style="margin-top: 16px;">
-                    练习的节奏和强度都由你自己决定，没有人催促你，也没有固定的课程表。
+                <p style="color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.5;">
+                    不只是学习工具，更是比你还懂你的贴心英语伙伴。24小时在线陪伴，随时随地想聊就聊，无限话题任你挑选。
                 </p>
             </div>
-            <div class="narrative-image">
-                <div style="width: 100%; max-width: 280px; height: 200px; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; border: 1px solid rgba(255,255,255,0.2);">
-                    <div style="font-size: 28px; margin-bottom: 16px;">🧠</div>
-                    <div style="font-size: 16px; text-align: center; opacity: 0.9; line-height: 1.6; font-weight: 500;">
-                        <div style="margin-bottom: 12px; font-weight: 600;">我的练习计划</div>
-                        <div style="margin-bottom: 6px;">• 日常对话 (自由选择)</div>
-                        <div style="margin-bottom: 6px;">• 商务英语 (按需练习)</div>
-                        <div>• 旅游口语 (随时开始)</div>
-                    </div>
+            
+            <!-- 优化后的按钮组 -->
+            <div class="hero-actions" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
+                <a href="#features" class="btn btn-primary" style="background: linear-gradient(135deg, #ffffff, #f8f9fa); color: #667eea; font-weight: 700; box-shadow: 0 8px 25px rgba(255,255,255,0.3); border: none; position: relative; overflow: hidden;">
+                    <span style="position: relative; z-index: 1;">🚀 开始免费体验</span>
+                    <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.5s; z-index: 0;"></div>
+                </a>
+                <a href="#features" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.4); backdrop-filter: blur(10px);">
+                    💬 看看我的AI伙伴
+                </a>
+            </div>
+            
+            <!-- 新增：信任标识 -->
+            <div style="margin-top: 48px; display: flex; justify-content: center; align-items: center; gap: 32px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; color: rgba(255,255,255,0.8); font-size: 14px;">
+                    <span style="color: #34c759; font-size: 18px; margin-right: 8px;">✓</span>
+                    世界先进AI技术
+                </div>
+                <div style="display: flex; align-items: center; color: rgba(255,255,255,0.8); font-size: 14px;">
+                    <span style="color: #34c759; font-size: 18px; margin-right: 8px;">✓</span>
+                    个性化学习体验
+                </div>
+                <div style="display: flex; align-items: center; color: rgba(255,255,255,0.8); font-size: 14px;">
+                    <span style="color: #34c759; font-size: 18px; margin-right: 8px;">✓</span>
+                    完全免费试用
                 </div>
             </div>
         </div>
+        
+        <!-- 新增：滚动提示 -->
+        <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); text-align: center; animation: bounce 2s infinite;">
+            <div style="font-size: 12px; margin-bottom: 8px;">向下滚动了解更多</div>
+            <div style="font-size: 20px;">↓</div>
+        </div>
     </section>
 
-    <!-- 核心理念区域 -->
-    <section class="narrative-section" style="background: #fff;">
-        <div class="narrative-content">
-            <div class="narrative-text">
-                <h2 class="narrative-title" style="color: #0071E3;">口语就是要多说多练</h2>
-                <p class="narrative-description" style="font-size: 20px; font-weight: 500; color: #1d1d1f; margin-bottom: 20px;">
-                    说得多了，自然就流利了
-                </p>
-                <p class="narrative-description">
-                    学口语没有捷径，就是要多开口说话。
-                    每天坚持练习，从简单的对话开始，慢慢提升难度。
+    <!-- 叙事分屏 1：随时练习 + Disney风格卡片 -->
+    <section class="narrative-section" id="features" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 0;">
+        <div class="container">
+            <div class="narrative-content">
+                <div class="narrative-text" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); margin-bottom: 60px;">
+                    <h2 class="narrative-title" style="color: #667eea;">你的AI英语伙伴，随叫随到</h2>
+                    <p class="narrative-description">
+                        不用担心说错，不用害怕被笑话。你的AI伙伴永远耐心陪伴，
+                        让你在零压力的环境中自信开口。
+                    </p>
+                    <p class="narrative-description" style="margin-top: 16px;">
+                        地铁上、家里、办公室...任何地方都是你的专属英语练习室。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 双iPhone模拟界面 + 功能卡片 -->
+            <div class="iphone-demo-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; align-items: center;">
+                
+                <!-- 双iPhone模拟界面 -->
+                <div style="display: flex; justify-content: center; gap: 20px; position: relative;">
+                    <!-- 环境光反射 -->
+                    <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 300px; height: 100px; background: radial-gradient(ellipse, rgba(102, 126, 234, 0.1) 0%, transparent 70%); pointer-events: none; z-index: 0;"></div>
+                    
+                    <!-- 左侧iPhone - 简洁功能展示 -->
+                    <div class="iphone-mockup" style="width: 260px; height: 520px; background: linear-gradient(145deg, #2c2c2e 0%, #1c1c1e 50%, #000000 100%); border-radius: 35px; padding: 6px; box-shadow: 0 25px 60px rgba(0,0,0,0.4), 0 8px 25px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.1); transform: rotate(-5deg); z-index: 1; position: relative;">
+                        <!-- iPhone边框高光 -->
+                        <div style="position: absolute; top: 2px; left: 2px; right: 2px; bottom: 2px; border-radius: 33px; border: 1px solid rgba(255,255,255,0.1); pointer-events: none;"></div>
+                        
+                        <!-- 侧边按键 -->
+                        <div style="position: absolute; left: -2px; top: 80px; width: 3px; height: 30px; background: linear-gradient(90deg, #1a1a1a, #2a2a2a); border-radius: 0 2px 2px 0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);"></div>
+                        <div style="position: absolute; left: -2px; top: 120px; width: 3px; height: 50px; background: linear-gradient(90deg, #1a1a1a, #2a2a2a); border-radius: 0 2px 2px 0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);"></div>
+                        <div style="position: absolute; right: -2px; top: 100px; width: 3px; height: 60px; background: linear-gradient(270deg, #1a1a1a, #2a2a2a); border-radius: 2px 0 0 2px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);"></div>
+                        
+                        <!-- 屏幕 -->
+                        <div style="width: 100%; height: 100%; background: #000000; border-radius: 29px; position: relative; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);">
+                            <!-- 屏幕内容背景 -->
+                            <div style="position: absolute; inset: 0; background: #ffffff; border-radius: 29px;"></div>
+                            
+                            <!-- 屏幕反光效果 -->
+                            <div style="position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%); pointer-events: none; z-index: 5;"></div>
+                            
+                            <!-- 刘海 -->
+                            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 28px; background: #000000; border-radius: 0 0 14px 14px; z-index: 10;"></div>
+                            <!-- 听筒 -->
+                            <div style="position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 50px; height: 4px; background: #333; border-radius: 2px; z-index: 11;"></div>
+                            <!-- 前置摄像头 -->
+                            <div style="position: absolute; top: 10px; left: 50%; transform: translateX(20px); width: 8px; height: 8px; background: radial-gradient(circle, #1a1a1a 30%, #000 100%); border-radius: 50%; z-index: 11; box-shadow: 0 0 0 1px rgba(255,255,255,0.1);"></div>
+                            
+                            <!-- 状态栏 -->
+                            <div style="height: 40px; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-size: 13px; font-weight: 600; color: white;">
+                                <span>9:41</span>
+                                <div style="display: flex; gap: 4px; align-items: center;">
+                                    <span style="font-size: 10px;">5G</span>
+                                    <div style="width: 16px; height: 8px; border: 1px solid white; border-radius: 2px;">
+                                        <div style="width: 12px; height: 4px; background: white; border-radius: 1px; margin: 1px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 左侧手机内容 - 文章学习界面 -->
+                            <div style="flex: 1; padding: 40px 24px; height: 420px; background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                
+                                <!-- 顶部图标 -->
+                                <div style="margin-bottom: 30px;">
+                                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #34c759, #30d158); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 8px 25px rgba(52, 199, 89, 0.3);">
+                                        <span style="color: white; font-size: 32px;">📚</span>
+                                    </div>
+                                    <div style="font-size: 18px; font-weight: 700; color: #1d1d1f; margin-bottom: 8px;">
+                                        文章
+                                    </div>
+                                    <div style="font-size: 14px; color: #8e8e93; font-weight: 500;">
+                                        智能推荐阅读
+                                    </div>
+                                </div>
+
+                                <!-- 进度展示 -->
+                                <div style="width: 100%; margin-bottom: 30px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <span style="font-size: 14px; color: #1d1d1f; font-weight: 600;">今日进度</span>
+                                        <span style="font-size: 14px; color: #34c759; font-weight: 700;">3/5 完成</span>
+                                    </div>
+                                    <div style="width: 100%; height: 8px; background: #f2f2f7; border-radius: 4px; overflow: hidden;">
+                                        <div style="width: 60%; height: 100%; background: linear-gradient(90deg, #34c759, #30d158); border-radius: 4px; transition: width 0.3s ease;"></div>
+                                    </div>
+                                </div>
+
+                                <!-- 功能按钮 -->
+                                <div style="width: 100%; display: flex; flex-direction: column; gap: 12px;">
+                                    <div style="background: #f8f9fa; border-radius: 16px; padding: 16px; display: flex; align-items: center; justify-content: space-between;">
+                                        <div style="display: flex; align-items: center;">
+                                            <div style="width: 32px; height: 32px; background: #007aff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                                <span style="color: white; font-size: 16px;">📖</span>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 14px; font-weight: 600; color: #1d1d1f;">阅读理解</div>
+                                                <div style="font-size: 12px; color: #8e8e93;">提升阅读能力</div>
+                                            </div>
+                                        </div>
+                                        <div style="color: #007aff; font-size: 18px;">→</div>
+                                    </div>
+
+                                    <div style="background: #f8f9fa; border-radius: 16px; padding: 16px; display: flex; align-items: center; justify-content: space-between;">
+                                        <div style="display: flex; align-items: center;">
+                                            <div style="width: 32px; height: 32px; background: #ff9500; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                                <span style="color: white; font-size: 16px;">🎧</span>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 14px; font-weight: 600; color: #1d1d1f;">听力训练</div>
+                                                <div style="font-size: 12px; color: #8e8e93;">精准听力练习</div>
+                                            </div>
+                                        </div>
+                                        <div style="color: #ff9500; font-size: 18px;">→</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右侧iPhone - 简洁有力的界面 -->
+                    <div class="iphone-mockup" style="width: 260px; height: 520px; background: linear-gradient(145deg, #2c2c2e 0%, #1c1c1e 50%, #000000 100%); border-radius: 35px; padding: 6px; box-shadow: 0 25px 60px rgba(0,0,0,0.4), 0 8px 25px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.1); transform: rotate(3deg); z-index: 2; position: relative;">
+                        <!-- iPhone边框高光 -->
+                        <div style="position: absolute; top: 2px; left: 2px; right: 2px; bottom: 2px; border-radius: 33px; border: 1px solid rgba(255,255,255,0.1); pointer-events: none;"></div>
+                        
+                        <!-- 侧边按键 -->
+                        <div style="position: absolute; left: -2px; top: 80px; width: 3px; height: 30px; background: linear-gradient(90deg, #1a1a1a, #2a2a2a); border-radius: 0 2px 2px 0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);"></div>
+                        <div style="position: absolute; left: -2px; top: 120px; width: 3px; height: 50px; background: linear-gradient(90deg, #1a1a1a, #2a2a2a); border-radius: 0 2px 2px 0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);"></div>
+                        <div style="position: absolute; right: -2px; top: 100px; width: 3px; height: 60px; background: linear-gradient(270deg, #1a1a1a, #2a2a2a); border-radius: 2px 0 0 2px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);"></div>
+                        
+                        <!-- 屏幕 -->
+                        <div style="width: 100%; height: 100%; background: #000000; border-radius: 29px; position: relative; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);">
+                            <!-- 屏幕内容背景 -->
+                            <div style="position: absolute; inset: 0; background: #ffffff; border-radius: 29px;"></div>
+                            
+                            <!-- 屏幕反光效果 -->
+                            <div style="position: absolute; top: 0; right: 0; width: 40%; height: 100%; background: linear-gradient(-45deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%); pointer-events: none; z-index: 5;"></div>
+                            
+                            <!-- 刘海 -->
+                            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 28px; background: #000000; border-radius: 0 0 14px 14px; z-index: 10;"></div>
+                            <!-- 听筒 -->
+                            <div style="position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 50px; height: 4px; background: #333; border-radius: 2px; z-index: 11;"></div>
+                            <!-- 前置摄像头 -->
+                            <div style="position: absolute; top: 10px; left: 50%; transform: translateX(20px); width: 8px; height: 8px; background: radial-gradient(circle, #1a1a1a 30%, #000 100%); border-radius: 50%; z-index: 11; box-shadow: 0 0 0 1px rgba(255,255,255,0.1);"></div>
+                            
+                            <!-- 状态栏 -->
+                            <div style="height: 40px; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-size: 13px; font-weight: 600; color: white;">
+                                <span>9:41</span>
+                                <div style="display: flex; gap: 4px; align-items: center;">
+                                    <span style="font-size: 10px;">5G</span>
+                                    <div style="width: 16px; height: 8px; border: 1px solid white; border-radius: 2px;">
+                                        <div style="width: 12px; height: 4px; background: white; border-radius: 1px; margin: 1px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 动态学习界面 - 模仿Readle风格 -->
+                            <div id="dynamicContent" style="flex: 1; padding: 20px; height: 420px; background: #ffffff; position: relative;">
+                                
+                                <!-- 界面1：阅读练习 -->
+                                <div class="content-screen active" style="position: absolute; inset: 20px; opacity: 1; transition: opacity 0.5s ease;">
+                                    <div style="text-align: center; margin-bottom: 20px;">
+                                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #34c759, #30d158); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+                                            <span style="color: white; font-size: 24px;">📖</span>
+                                        </div>
+                                        <h3 style="font-size: 18px; font-weight: 700; color: #1d1d1f; margin-bottom: 8px;">阅读理解</h3>
+                                        <p style="font-size: 12px; color: #8e8e93;">A1-B2水平短文训练</p>
+                                    </div>
+                                    
+                                    <div style="background: #f8f9fa; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                                        <h4 style="font-size: 14px; font-weight: 600; color: #1d1d1f; margin-bottom: 8px;">今日文章</h4>
+                                        <p style="font-size: 12px; color: #6c757d; line-height: 1.4;">The Mediterranean diet is simple and mostly made of plants...</p>
+                                    </div>
+                                    
+                                    <div style="display: flex; gap: 8px;">
+                                        <div style="flex: 1; background: #007aff; color: white; padding: 8px; border-radius: 8px; text-align: center; font-size: 12px; font-weight: 600;">开始阅读</div>
+                                        <div style="flex: 1; background: #e5e5ea; color: #8e8e93; padding: 8px; border-radius: 8px; text-align: center; font-size: 12px;">跳过</div>
+                                    </div>
+                                </div>
+
+                                <!-- 界面2：听力练习 -->
+                                <div class="content-screen" style="position: absolute; inset: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                                    <div style="text-align: center; margin-bottom: 20px;">
+                                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #ff9500, #ff6b35); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+                                            <span style="color: white; font-size: 24px;">🎧</span>
+                                        </div>
+                                        <h3 style="font-size: 18px; font-weight: 700; color: #1d1d1f; margin-bottom: 8px;">听力训练</h3>
+                                        <p style="font-size: 12px; color: #8e8e93;">精听全文，单句重复</p>
+                                    </div>
+                                    
+                                    <div style="background: #f8f9fa; border-radius: 12px; padding: 16px; margin-bottom: 16px; text-align: center;">
+                                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #ff9500, #ff6b35); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+                                            <span style="color: white; font-size: 32px;">▶</span>
+                                        </div>
+                                        <p style="font-size: 12px; color: #6c757d;">点击播放音频</p>
+                                    </div>
+                                    
+                                    <div style="background: #007aff; color: white; padding: 12px; border-radius: 8px; text-align: center; font-size: 12px; font-weight: 600;">开始听力练习</div>
+                                </div>
+
+                                <!-- 界面3：语法学习 -->
+                                <div class="content-screen" style="position: absolute; inset: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                                    <div style="text-align: center; margin-bottom: 20px;">
+                                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #007aff, #0051d5); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+                                            <span style="color: white; font-size: 24px;">📝</span>
+                                        </div>
+                                        <h3 style="font-size: 18px; font-weight: 700; color: #1d1d1f; margin-bottom: 8px;">语法解析</h3>
+                                        <p style="font-size: 12px; color: #8e8e93;">详尽语法重点解析</p>
+                                    </div>
+                                    
+                                    <div style="background: #f8f9fa; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                                        <h4 style="font-size: 14px; font-weight: 600; color: #1d1d1f; margin-bottom: 8px;">语法重点</h4>
+                                        <div style="background: #007aff; color: white; padding: 4px 8px; border-radius: 4px; display: inline-block; font-size: 10px; margin-bottom: 8px;">现在完成时</div>
+                                        <p style="font-size: 12px; color: #6c757d; line-height: 1.4;">I have lived here for 5 years.</p>
+                                    </div>
+                                    
+                                    <div style="background: #007aff; color: white; padding: 12px; border-radius: 8px; text-align: center; font-size: 12px; font-weight: 600;">查看详细解析</div>
+                                </div>
+
+                                <!-- 界面4：单词记忆 -->
+                                <div class="content-screen" style="position: absolute; inset: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                                    <div style="text-align: center; margin-bottom: 20px;">
+                                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #ff3b30, #ff6b6b); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+                                            <span style="color: white; font-size: 24px;">🧠</span>
+                                        </div>
+                                        <h3 style="font-size: 18px; font-weight: 700; color: #1d1d1f; margin-bottom: 8px;">背单词</h3>
+                                        <p style="font-size: 12px; color: #8e8e93;">间隔记忆，高效复习</p>
+                                    </div>
+                                    
+                                    <div style="background: #f8f9fa; border-radius: 12px; padding: 16px; margin-bottom: 16px; text-align: center;">
+                                        <h4 style="font-size: 16px; font-weight: 700; color: #1d1d1f; margin-bottom: 8px;">Mediterranean</h4>
+                                        <p style="font-size: 12px; color: #6c757d; margin-bottom: 12px;">/ˌmedɪtəˈreɪniən/</p>
+                                        <p style="font-size: 12px; color: #6c757d;">adj. 地中海的</p>
+                                    </div>
+                                    
+                                    <div style="display: flex; gap: 8px;">
+                                        <div style="flex: 1; background: #34c759; color: white; padding: 8px; border-radius: 8px; text-align: center; font-size: 12px; font-weight: 600;">认识</div>
+                                        <div style="flex: 1; background: #ff3b30; color: white; padding: 8px; border-radius: 8px; text-align: center; font-size: 12px; font-weight: 600;">不认识</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                let currentScreen = 0;
+                                const screens = document.querySelectorAll('.content-screen');
+                                
+                                function switchScreen() {
+                                    screens[currentScreen].style.opacity = '0';
+                                    currentScreen = (currentScreen + 1) % screens.length;
+                                    screens[currentScreen].style.opacity = '1';
+                                }
+                                
+                                setInterval(switchScreen, 3000);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 功能特点卡片 - 更有情感和说服力 -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    
+                    <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 20px; padding: 28px; color: white; border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                        <div style="position: relative; z-index: 1;">
+                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                                <span style="font-size: 24px;">💭</span>
+                            </div>
+                            <h4 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;">智能对话练习</h4>
+                            <p style="opacity: 0.95; font-size: 15px; line-height: 1.6; font-weight: 500;">
+                                AI伙伴陪你聊遍天下，从日常闲聊到专业讨论，
+                                <span style="color: #ffd700;">想聊什么都行</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 20px; padding: 28px; color: white; border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                        <div style="position: relative; z-index: 1;">
+                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                                <span style="font-size: 24px;">🎯</span>
+                            </div>
+                            <h4 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;">实时发音纠正</h4>
+                            <p style="opacity: 0.95; font-size: 15px; line-height: 1.6; font-weight: 500;">
+                                AI实时分析你的发音，给出专业建议，
+                                <span style="color: #ffd700;">让你的英语更地道更自信</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 20px; padding: 28px; color: white; border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                        <div style="position: relative; z-index: 1;">
+                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                                <span style="font-size: 24px;">🤖</span>
+                            </div>
+                            <h4 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;">24小时在线陪伴</h4>
+                            <p style="opacity: 0.95; font-size: 15px; line-height: 1.6; font-weight: 500;">
+                                深夜想练口语？通勤路上？午休间隙？
+                                <span style="color: #ffd700;">你的AI伙伴永远在线等你</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 叙事分屏 2：自主掌控 + Disney风格内容卡片 -->
+    <section class="narrative-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 80px 0;">
+        <div class="container">
+            <div class="narrative-content">
+                <div class="narrative-text" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); margin-bottom: 60px; text-align: center;">
+                    <h2 class="narrative-title" style="color: #f5576c;">比你还懂你的AI伙伴</h2>
+                    <p class="narrative-description">
+                        你的AI伙伴会记住你的每一次进步，了解你的学习习惯，
+                        为你量身定制最适合的练习内容。
+                    </p>
+                    <p class="narrative-description" style="margin-top: 16px;">
+                        想聊什么话题都行，从日常闲聊到专业讨论，你的AI伙伴都能陪你聊个够。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 模拟网页界面 + 功能卡片 -->
+            <div class="web-demo-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; align-items: center;">
+                
+                <!-- 模拟网页界面 -->
+                <div style="display: flex; justify-content: center;">
+                    <div class="web-mockup" style="width: 400px; height: 500px; background: #f0f0f5; border-radius: 20px; padding: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); position: relative;">
+                        
+                        <!-- AI头像 -->
+                        <div style="position: absolute; top: -20px; left: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);">
+                            <span style="color: white; font-size: 24px;">🤖</span>
+                        </div>
+
+                        <!-- 网页内容 -->
+                        <div style="margin-top: 40px; padding: 20px;">
+                            
+                            <!-- AI问候语 -->
+                            <div style="margin-bottom: 30px;">
+                                <h3 style="font-size: 1.4rem; font-weight: 700; color: #1d1d1f; line-height: 1.4; margin-bottom: 16px;">
+                                    嗨！我注意到你最近在练习商务英语，为你准备了专属的职场必备表达！
+                                </h3>
+                            </div>
+
+                            <!-- 课程卡片 -->
+                            <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); margin-bottom: 20px;">
+                                
+                                <!-- 课程图标和标题 -->
+                                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 16px;">
+                                        <span style="color: white; font-size: 20px;">💼</span>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 14px; color: #86868b; margin-bottom: 4px;">你的专属课程</div>
+                                        <h4 style="font-size: 1.3rem; font-weight: 700; color: #1d1d1f;">职场英语必备表达</h4>
+                                    </div>
+                                </div>
+
+                                <!-- 课程内容预览 -->
+                                <div style="background: #f8f9fa; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                                    <div style="font-size: 15px; font-weight: 600; color: #1d1d1f; margin-bottom: 8px;">今日重点：会议发言</div>
+                                    <div style="font-size: 14px; color: #86868b; line-height: 1.5;">
+                                        • "I'd like to add something..."<br>
+                                        • "From my perspective..."<br>
+                                        • "Could we explore this further?"
+                                    </div>
+                                </div>
+
+                                <!-- 开始按钮 -->
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="font-size: 13px; color: #86868b;">
+                                        <span style="color: #34c759; font-weight: 600;">●</span> 已为你定制 • 5分钟完成
+                                    </div>
+                                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600;">
+                                        开始练习
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 进度提示 -->
+                            <div style="text-align: center; font-size: 13px; color: #86868b;">
+                                🎯 根据你的学习进度智能推荐
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 功能特点卡片 -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    
+                    <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 16px; padding: 24px; color: white; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 40px; margin-bottom: 12px;">🧠</div>
+                        <h4 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px;">智能内容推荐</h4>
+                        <p style="opacity: 0.9; font-size: 14px; line-height: 1.5;">AI分析你的学习进度，自动推荐最适合的练习内容</p>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 16px; padding: 24px; color: white; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 40px; margin-bottom: 12px;">📊</div>
+                        <h4 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px;">个性化学习路径</h4>
+                        <p style="opacity: 0.9; font-size: 14px; line-height: 1.5;">根据你的兴趣和需求，量身定制专属学习计划</p>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 16px; padding: 24px; color: white; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 40px; margin-bottom: 12px;">🎯</div>
+                        <h4 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px;">精准学习建议</h4>
+                        <p style="opacity: 0.9; font-size: 14px; line-height: 1.5;">AI实时分析你的薄弱环节，提供针对性改进建议</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 全新：AI伙伴介绍区域 -->
+    <section style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 100px 0; position: relative; overflow: hidden;">
+        <!-- 背景装饰 -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%); opacity: 0.3;"></div>
+        
+        <div class="container" style="position: relative; z-index: 1;">
+            <!-- 区域标题 -->
+            <div style="text-align: center; margin-bottom: 80px;">
+                <div style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 20px; border-radius: 25px; margin-bottom: 24px; font-size: 14px; font-weight: 600;">
+                    ✨ 认识你的AI英语伙伴
+                </div>
+                <h2 style="font-size: 3rem; font-weight: 700; color: #1d1d1f; margin-bottom: 20px; line-height: 1.2;">
+                    不只是AI，更是懂你的<span style="color: #667eea;">贴心伙伴</span>
+                </h2>
+                <p style="font-size: 1.2rem; color: #6c757d; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                    每个人的学习方式都不同，你的AI伙伴会深度了解你，为你量身定制最适合的学习体验
                 </p>
             </div>
-            <div class="narrative-image">
-                <div style="width: 100%; max-width: 280px; height: 200px; background: linear-gradient(135deg, #0071E3 0%, #005bb5 100%); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
-                    <div style="font-size: 32px; margin-bottom: 20px;">🗣️</div>
-                    <div style="font-size: 16px; text-align: center; font-weight: 600; margin-bottom: 16px;">口语练习要点</div>
-                    <div style="font-size: 16px; text-align: center; line-height: 1.6; font-weight: 500;">
-                        <div style="margin-bottom: 8px;">🎯 每天坚持开口</div>
-                        <div style="margin-bottom: 8px;">💡 从简单开始</div>
-                        <div>🚀 逐步提升难度</div>
+            
+            <!-- AI伙伴特性展示 -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 80px;">
+                
+                <!-- 特性1：记忆你的偏好 -->
+                <div style="background: white; border-radius: 20px; padding: 32px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); position: relative; overflow: hidden; transition: transform 0.3s ease;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #ff6b6b, #feca57); border-radius: 50%; opacity: 0.1;"></div>
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #ff6b6b, #feca57); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <span style="color: white; font-size: 24px;">🧠</span>
+                    </div>
+                    <h3 style="font-size: 1.4rem; font-weight: 700; color: #1d1d1f; margin-bottom: 12px;">记住你的每一次进步</h3>
+                    <p style="color: #6c757d; line-height: 1.6; margin-bottom: 16px;">
+                        你喜欢什么话题？哪些单词容易忘记？什么时候学习效果最好？AI伙伴都会记住，越聊越懂你。
+                    </p>
+                    <div style="display: flex; align-items: center; color: #ff6b6b; font-size: 14px; font-weight: 600;">
+                        <span style="margin-right: 8px;">→</span>
+                        个性化记忆系统
+                    </div>
+                </div>
+                
+                <!-- 特性2：24/7陪伴 -->
+                <div style="background: white; border-radius: 20px; padding: 32px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); position: relative; overflow: hidden; transition: transform 0.3s ease;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; opacity: 0.1;"></div>
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <span style="color: white; font-size: 24px;">🌙</span>
+                    </div>
+                    <h3 style="font-size: 1.4rem; font-weight: 700; color: #1d1d1f; margin-bottom: 12px;">随时随地陪伴你</h3>
+                    <p style="color: #6c757d; line-height: 1.6; margin-bottom: 16px;">
+                        深夜想练口语？早晨通勤路上？午休间隙？你的AI伙伴永远在线，随叫随到，从不抱怨。
+                    </p>
+                    <div style="display: flex; align-items: center; color: #667eea; font-size: 14px; font-weight: 600;">
+                        <span style="margin-right: 8px;">→</span>
+                        24小时在线陪伴
+                    </div>
+                </div>
+                
+                <!-- 特性3：无限耐心 -->
+                <div style="background: white; border-radius: 20px; padding: 32px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); position: relative; overflow: hidden; transition: transform 0.3s ease;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: linear-gradient(135deg, #48cae4, #0077b6); border-radius: 50%; opacity: 0.1;"></div>
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #48cae4, #0077b6); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <span style="color: white; font-size: 24px;">💝</span>
+                    </div>
+                    <h3 style="font-size: 1.4rem; font-weight: 700; color: #1d1d1f; margin-bottom: 12px;">永远不会不耐烦</h3>
+                    <p style="color: #6c757d; line-height: 1.6; margin-bottom: 16px;">
+                        说错了？重复练习？发音不标准？AI伙伴永远温柔耐心，给你最大的鼓励和支持。
+                    </p>
+                    <div style="display: flex; align-items: center; color: #48cae4; font-size: 14px; font-weight: 600;">
+                        <span style="margin-right: 8px;">→</span>
+                        无限耐心陪练
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 用户证言区域 -->
+            <div style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 24px; padding: 60px 40px; text-align: center; color: white; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; opacity: 0.5;"></div>
+                <div style="position: absolute; bottom: -30px; right: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.08); border-radius: 50%;"></div>
+                
+                <div style="position: relative; z-index: 1;">
+                    <div style="font-size: 48px; margin-bottom: 24px;">💬</div>
+                    <blockquote style="font-size: 1.3rem; font-weight: 500; line-height: 1.6; margin-bottom: 32px; font-style: italic;">
+                        "我的AI伙伴真的很懂我！它知道我喜欢聊旅行话题，总是推荐相关的练习。现在我已经能自信地和外国朋友聊天了！"
+                    </blockquote>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 16px;">
+                        <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;">👩</div>
+                        <div style="text-align: left;">
+                            <div style="font-weight: 600; font-size: 16px;">小雨</div>
+                            <div style="opacity: 0.8; font-size: 14px;">使用3个月，从害羞到自信</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 全新：学习成果展示区域 -->
+    <section style="background: #fff; padding: 100px 0; position: relative;">
+        <div class="container">
+            <!-- 区域标题 -->
+            <div style="text-align: center; margin-bottom: 80px;">
+                <div style="display: inline-flex; align-items: center; background: linear-gradient(135deg, #34c759, #30d158); color: white; padding: 8px 20px; border-radius: 25px; margin-bottom: 24px; font-size: 14px; font-weight: 600;">
+                    🎉 真实用户成果
+                </div>
+                <h2 style="font-size: 3rem; font-weight: 700; color: #1d1d1f; margin-bottom: 20px; line-height: 1.2;">
+                    看看他们的<span style="color: #34c759;">蜕变之路</span>
+                </h2>
+                <p style="font-size: 1.2rem; color: #6c757d; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                    从害怕开口到自信表达，每一个进步都值得庆祝
+                </p>
+            </div>
+            
+            <!-- 成果展示卡片 -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-bottom: 60px;">
+                
+                <!-- 成果1：口语流利度提升 -->
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 24px; padding: 40px; color: white; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 16px;">
+                                <span style="font-size: 24px;">🗣️</span>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;">口语流利度</h3>
+                                <p style="opacity: 0.9; font-size: 14px;">3个月平均提升</p>
+                            </div>
+                        </div>
+                        <div style="font-size: 3rem; font-weight: 800; margin-bottom: 8px;">85%</div>
+                        <p style="opacity: 0.9; font-size: 16px; line-height: 1.5;">
+                            从磕磕绊绊到流利对话，用户平均在3个月内口语流利度提升85%
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 成果2：学习时长 -->
+                <div style="background: linear-gradient(135deg, #ff6b6b, #feca57); border-radius: 24px; padding: 40px; color: white; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 16px;">
+                                <span style="font-size: 24px;">⏰</span>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;">学习坚持度</h3>
+                                <p style="opacity: 0.9; font-size: 14px;">每日平均练习</p>
+                            </div>
+                        </div>
+                        <div style="font-size: 3rem; font-weight: 800; margin-bottom: 8px;">25分钟</div>
+                        <p style="opacity: 0.9; font-size: 16px; line-height: 1.5;">
+                            AI伙伴让学习变得有趣，用户平均每天主动练习25分钟
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 成果3：自信度提升 -->
+                <div style="background: linear-gradient(135deg, #48cae4, #0077b6); border-radius: 24px; padding: 40px; color: white; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 16px;">
+                                <span style="font-size: 24px;">💪</span>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;">开口自信度</h3>
+                                <p style="opacity: 0.9; font-size: 14px;">心理障碍突破</p>
+                            </div>
+                        </div>
+                        <div style="font-size: 3rem; font-weight: 800; margin-bottom: 8px;">92%</div>
+                        <p style="opacity: 0.9; font-size: 16px; line-height: 1.5;">
+                            92%的用户表示不再害怕开口说英语，自信心显著提升
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 用户进步时间线 -->
+            <div style="background: #f8f9fa; border-radius: 24px; padding: 60px 40px; position: relative;">
+                <h3 style="text-align: center; font-size: 2rem; font-weight: 700; color: #1d1d1f; margin-bottom: 50px;">
+                    你的英语进步之路 🚀
+                </h3>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; position: relative; max-width: 800px; margin: 0 auto;">
+                    <!-- 进度线 -->
+                    <div style="position: absolute; top: 50%; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #667eea, #764ba2); border-radius: 2px; z-index: 0;"></div>
+                    
+                    <!-- 第1周 -->
+                    <div style="text-align: center; position: relative; z-index: 1;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);">
+                            <span style="color: white; font-size: 20px; font-weight: 700;">1</span>
+                        </div>
+                        <div style="font-weight: 600; color: #1d1d1f; margin-bottom: 8px;">第1周</div>
+                        <div style="font-size: 14px; color: #6c757d; max-width: 120px;">开始适应<br>AI伙伴</div>
+                    </div>
+                    
+                    <!-- 第2周 -->
+                    <div style="text-align: center; position: relative; z-index: 1;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #ff6b6b, #feca57); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);">
+                            <span style="color: white; font-size: 20px; font-weight: 700;">2</span>
+                        </div>
+                        <div style="font-weight: 600; color: #1d1d1f; margin-bottom: 8px;">第2周</div>
+                        <div style="font-size: 14px; color: #6c757d; max-width: 120px;">敢于<br>开口说话</div>
+                    </div>
+                    
+                    <!-- 第1个月 -->
+                    <div style="text-align: center; position: relative; z-index: 1;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #48cae4, #0077b6); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 4px 16px rgba(72, 202, 228, 0.3);">
+                            <span style="color: white; font-size: 16px; font-weight: 700;">1M</span>
+                        </div>
+                        <div style="font-weight: 600; color: #1d1d1f; margin-bottom: 8px;">第1个月</div>
+                        <div style="font-size: 14px; color: #6c757d; max-width: 120px;">流利度<br>明显提升</div>
+                    </div>
+                    
+                    <!-- 第3个月 -->
+                    <div style="text-align: center; position: relative; z-index: 1;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #34c759, #30d158); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 4px 16px rgba(52, 199, 89, 0.3);">
+                            <span style="color: white; font-size: 16px; font-weight: 700;">3M</span>
+                        </div>
+                        <div style="font-weight: 600; color: #1d1d1f; margin-bottom: 8px;">第3个月</div>
+                        <div style="font-size: 14px; color: #6c757d; max-width: 120px;">自信<br>表达想法</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 学习效果展示区域 - 模仿Speak.com风格 -->
+    <section style="background: #f8f9fa; padding: 100px 0;">
+        <div class="container">
+            <!-- 区域标题 -->
+            <div style="text-align: center; margin-bottom: 80px;">
+                <h2 style="font-size: 2.5rem; font-weight: 700; color: #1d1d1f; margin-bottom: 20px;">
+                    让英语学习高效不无聊
+                </h2>
+                <p style="font-size: 1.2rem; color: #6c757d; max-width: 600px; margin: 0 auto;">
+                    轻松快速实现你的学习目标，见证自己从紧张到自信的蜕变
+                </p>
+            </div>
+            
+            <!-- 双栏布局 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                
+                <!-- 左侧：数据可视化 -->
+                <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: #1d1d1f; margin-bottom: 8px;">
+                            仅在第一周的学习中，AI英语伙伴帮助了
+                        </h3>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: #007aff; margin-bottom: 8px;">
+                            1,100 <span style="font-size: 1.2rem; color: #6c757d;">句英文</span>
+                        </div>
+                        <p style="color: #8e8e93; font-size: 14px;">一周时间内学会说的英语句数</p>
+                    </div>
+                    
+                    <!-- 柱状图 -->
+                    <div style="display: flex; align-items: end; justify-content: space-between; height: 200px; margin-bottom: 20px; padding: 0 20px;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 30px; height: 60px; background: linear-gradient(to top, #007aff, #0051d5); border-radius: 4px; margin-bottom: 8px;"></div>
+                            <span style="font-size: 12px; color: #8e8e93;">第1天</span>
+                            <span style="font-size: 10px; color: #007aff; font-weight: 600;">110</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 30px; height: 80px; background: linear-gradient(to top, #007aff, #0051d5); border-radius: 4px; margin-bottom: 8px;"></div>
+                            <span style="font-size: 12px; color: #8e8e93;">第2天</span>
+                            <span style="font-size: 10px; color: #007aff; font-weight: 600;">131</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 30px; height: 120px; background: linear-gradient(to top, #007aff, #0051d5); border-radius: 4px; margin-bottom: 8px;"></div>
+                            <span style="font-size: 12px; color: #8e8e93;">第3天</span>
+                            <span style="font-size: 10px; color: #007aff; font-weight: 600;">167</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 30px; height: 140px; background: linear-gradient(to top, #007aff, #0051d5); border-radius: 4px; margin-bottom: 8px;"></div>
+                            <span style="font-size: 12px; color: #8e8e93;">第4天</span>
+                            <span style="font-size: 10px; color: #007aff; font-weight: 600;">198</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 30px; height: 160px; background: linear-gradient(to top, #007aff, #0051d5); border-radius: 4px; margin-bottom: 8px;"></div>
+                            <span style="font-size: 12px; color: #8e8e93;">第5天</span>
+                            <span style="font-size: 10px; color: #007aff; font-weight: 600;">240</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 30px; height: 180px; background: linear-gradient(to top, #007aff, #0051d5); border-radius: 4px; margin-bottom: 8px;"></div>
+                            <span style="font-size: 12px; color: #8e8e93;">第6天</span>
+                            <span style="font-size: 10px; color: #007aff; font-weight: 600;">277</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 30px; height: 200px; background: linear-gradient(to top, #007aff, #0051d5); border-radius: 4px; margin-bottom: 8px;"></div>
+                            <span style="font-size: 12px; color: #8e8e93;">第7天</span>
+                            <span style="font-size: 10px; color: #007aff; font-weight: 600;">317</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右侧：沉浸式学习展示 -->
+                <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: linear-gradient(135deg, #ff6b6b, #feca57); border-radius: 50%; opacity: 0.1;"></div>
+                    
+                    <div style="position: relative; z-index: 1;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: #1d1d1f; margin-bottom: 20px;">
+                            沉浸式学习，快速提升语言水平不在话下
+                        </h3>
+                        <p style="color: #6c757d; font-size: 14px; margin-bottom: 30px;">
+                            用Speak练习3周实用英语口语表达
+                        </p>
+                        
+                        <!-- 对话示例 -->
+                        <div style="background: #f8f9fa; border-radius: 16px; padding: 20px; margin-bottom: 20px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                                <div style="width: 32px; height: 32px; background: #007aff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <span style="color: white; font-size: 16px;">👤</span>
+                                </div>
+                                <div style="font-size: 14px; color: #1d1d1f;">
+                                    <strong>I had a blast hanging out today!</strong>
+                                </div>
+                            </div>
+                            <div style="margin-left: 44px; color: #6c757d; font-size: 13px; margin-bottom: 16px;">
+                                今天一起玩得太开心了！
+                            </div>
+                            <div style="background: #007aff; color: white; padding: 8px 12px; border-radius: 12px; display: inline-block; font-size: 12px; font-weight: 600;">
+                                今天一起玩得太开心了！
+                            </div>
+                        </div>
+                        
+                        <!-- 学习成果 -->
+                        <div style="display: flex; gap: 16px;">
+                            <div style="flex: 1; text-align: center; padding: 16px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; color: white;">
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 4px;">🌟</div>
+                                <div style="font-size: 12px; opacity: 0.9;">从自信开口开始</div>
+                            </div>
+                            <div style="flex: 1; text-align: center; padding: 16px; background: linear-gradient(135deg, #ff6b6b, #feca57); border-radius: 12px; color: white;">
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 4px;">🎯</div>
+                                <div style="font-size: 12px; opacity: 0.9;">见证自己蜕变</div>
+                            </div>
+                            <div style="flex: 1; text-align: center; padding: 16px; background: linear-gradient(135deg, #48cae4, #0077b6); border-radius: 12px; color: white;">
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 4px;">💝</div>
+                                <div style="font-size: 12px; opacity: 0.9;">个性化体验</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心理念卡片区域 -->
+    <section style="background: #fff; padding: 80px 0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 2rem; font-weight: 700; color: #1d1d1f; margin-bottom: 16px;">
+                    时刻保持学习动力
+                </h2>
+                <p style="color: #6c757d; font-size: 1.1rem;">
+                    你的AI伙伴会让每一次练习都充满成就感
+                </p>
+            </div>
+
+            <!-- Disney风格练习方法卡片 - 重新设计布局 -->
+            <div class="practice-methods-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(2, 140px); gap: 20px; max-width: 1000px; margin: 0 auto;">
+                
+                <!-- 每天坚持 - 大卡片，占据左侧2x2 -->
+                <div style="grid-column: 1 / 3; grid-row: 1 / 3; background: linear-gradient(135deg, #0071E3 0%, #005bb5 100%); border-radius: 20px; padding: 30px; color: white; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: 60px; margin-bottom: 16px;">🌟</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 12px;">时刻保持学习动力</h3>
+                    <p style="font-size: 14px; line-height: 1.5; opacity: 0.9;">你的AI伙伴会记录每一次进步，让你看到自己的成长轨迹</p>
+                </div>
+
+                <!-- 从简单开始 - 右上角大横向卡片 -->
+                <div style="grid-column: 3 / 7; grid-row: 1; background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); display: flex; align-items: center;">
+                    <div style="font-size: 50px; margin-right: 20px;">🎈</div>
+                    <div>
+                        <h4 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 8px; color: #1d1d1f;">从自信开口开始</h4>
+                        <p style="color: #86868B; line-height: 1.4; font-size: 14px;">不用担心说错，每一次开口都是进步的开始</p>
+                    </div>
+                </div>
+
+                <!-- 逐步提升 - 右下角左侧 -->
+                <div style="grid-column: 3 / 5; grid-row: 2; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: 16px; padding: 25px; color: #333; display: flex; align-items: center;">
+                    <div style="font-size: 45px; margin-right: 15px;">🏆</div>
+                    <div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 6px;">见证自己蜕变</h4>
+                        <p style="font-size: 13px; opacity: 0.8; line-height: 1.3;">从紧张到自信的华丽转身</p>
+                    </div>
+                </div>
+
+                <!-- 实用技巧 - 右下角右侧 -->
+                <div style="grid-column: 5 / 7; grid-row: 2; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); border-radius: 16px; padding: 25px; color: white; display: flex; align-items: center;">
+                    <div style="font-size: 45px; margin-right: 15px;">💝</div>
+                    <div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 6px;">个性化体验</h4>
+                        <p style="font-size: 13px; opacity: 0.9; line-height: 1.3;">深度定制专属学习计划</p>
                     </div>
                 </div>
             </div>
@@ -828,11 +1698,12 @@
         <div class="cinematic-overlay"></div>
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #667eea, #764ba2); z-index: -1;"></div>
         <div class="cinematic-content">
-            <h2 class="cinematic-title">开始你的口语练习之旅</h2>
-            <p style="font-size: 21px; opacity: 0.9; margin-bottom: 32px;">每一次开口都是进步，每一天练习都有收获</p>
-            <a href="#features" class="btn btn-primary" style="font-size: 18px; padding: 16px 32px;">开始练口语</a>
+            <h2 class="cinematic-title">你的AI英语伙伴在等你</h2>
+            <p style="font-size: 21px; opacity: 0.9; margin-bottom: 32px;">不再孤单学英语，让AI陪伴你从紧张到自信的蜕变之旅</p>
+            <a href="#" class="btn btn-primary practice-demo-btn" style="font-size: 18px; padding: 16px 32px;">开始免费体验</a>
         </div>
     </section>
+
 
     <!-- FAQ 区域 -->
     <section class="faq-section" id="faq">
@@ -1001,26 +1872,177 @@
         function initFAQ() {
             const faqItems = document.querySelectorAll('.faq-item');
             
-            faqItems.forEach(item => {
+            document.querySelectorAll('.faq-item').forEach(item => {
                 const question = item.querySelector('.faq-question');
-                
                 question.addEventListener('click', () => {
                     const isOpen = item.classList.contains('open');
                     
-                    // 关闭所有其他项目
-                    faqItems.forEach(otherItem => {
+                    // 关闭所有其他FAQ
+                    document.querySelectorAll('.faq-item').forEach(otherItem => {
                         if (otherItem !== item) {
                             otherItem.classList.remove('open');
                         }
                     });
                     
-                    // 切换当前项目
-                    if (isOpen) {
-                        item.classList.remove('open');
-                    } else {
-                        item.classList.add('open');
-                    }
+                    // 切换当前FAQ
+                    item.classList.toggle('open', !isOpen);
                 });
+            });
+
+            // 添加练习演示功能
+            const practiceBtn = document.querySelector('.practice-demo-btn');
+            if (practiceBtn) {
+                practiceBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPracticeDemo();
+                });
+            }
+
+            // 其他"开始练习"按钮的反馈
+            document.querySelectorAll('.btn-primary:not(.practice-demo-btn)').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log('用户点击了开始练习按钮');
+                    
+                    const originalText = btn.textContent;
+                    btn.textContent = '正在准备...';
+                    btn.style.opacity = '0.7';
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.opacity = '1';
+                        alert('功能开发中，敬请期待！');
+                    }, 1000);
+                });
+            });
+
+            // 添加滚动到顶部功能
+            const scrollToTopBtn = document.createElement('button');
+            scrollToTopBtn.innerHTML = '↑';
+            scrollToTopBtn.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: var(--color-link);
+                color: white;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 1000;
+                box-shadow: var(--shadow-medium);
+            `;
+            
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            document.body.appendChild(scrollToTopBtn);
+            
+            // 滚动时显示/隐藏回到顶部按钮
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.opacity = '1';
+                } else {
+                    scrollToTopBtn.style.opacity = '0';
+                }
+            });
+        }
+
+        // 练习演示功能
+        function showPracticeDemo() {
+            // 创建模态框
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+
+            const demoContent = document.createElement('div');
+            demoContent.style.cssText = `
+                background: white;
+                padding: 40px;
+                border-radius: 20px;
+                max-width: 500px;
+                width: 90%;
+                text-align: center;
+                transform: translateY(20px);
+                transition: transform 0.3s ease;
+            `;
+
+            demoContent.innerHTML = `
+                <h3 style="margin-bottom: 20px; color: #333;">🎤 口语练习演示</h3>
+                <p style="margin-bottom: 30px; color: #666; line-height: 1.6;">
+                    这是一个演示版本。完整功能包括：<br>
+                    • 实时语音识别<br>
+                    • 发音准确度分析<br>
+                    • 个性化练习建议<br>
+                    • 学习进度跟踪
+                </p>
+                <div style="margin-bottom: 30px;">
+                    <button id="demo-start" style="
+                        background: #0071E3;
+                        color: white;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 12px;
+                        font-size: 16px;
+                        cursor: pointer;
+                        margin-right: 10px;
+                    ">体验演示</button>
+                    <button id="demo-close" style="
+                        background: #f0f0f0;
+                        color: #333;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 12px;
+                        font-size: 16px;
+                        cursor: pointer;
+                    ">关闭</button>
+                </div>
+                <p style="font-size: 14px; color: #999;">
+                    完整版本正在开发中，敬请期待！
+                </p>
+            `;
+
+            modal.appendChild(demoContent);
+            document.body.appendChild(modal);
+
+            // 动画显示
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                demoContent.style.transform = 'translateY(0)';
+            }, 10);
+
+            // 关闭功能
+            const closeModal = () => {
+                modal.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(modal);
+                }, 300);
+            };
+
+            document.getElementById('demo-close').addEventListener('click', closeModal);
+            document.getElementById('demo-start').addEventListener('click', () => {
+                alert('演示功能：请说 "Hello, how are you today?" \n\n模拟结果：\n✓ 发音准确度: 85%\n✓ 语调自然度: 78%\n✓ 建议：注意 "today" 的重音');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
             });
         }
         
