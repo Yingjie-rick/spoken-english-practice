@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 口语教练 - 专业的AI发音分析</title>
+    <meta name="description" content="专业的AI发音分析，让你的英语更地道。智能评估、实时反馈、个性化训练。">
+    
+    <style>
+        /* CSS 变量系统 */
+        :root {
+            /* 苹果官方色彩 */
+            --color-primary: #000;
+            --color-primary-light: #111;
+            --color-background: #F5F5F7;
+            --color-link: #0071E3;
+            --color-text-secondary: #86868B;
+            --color-white: #fff;
+            
+            /* 间距系统 */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+            --spacing-3xl: 96px;
+            
+            /* 圆角 */
+            --radius: 16px;
+            --radius-sm: 8px;
+            --radius-lg: 24px;
+            
+            /* 阴影 */
+            --shadow-light: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 32px rgba(0,0,0,0.12);
+            
+            /* 动画 */
+            --ease-apple: cubic-bezier(0.22,1,0.36,1);
+            --duration-fast: 300ms;
+            --duration-normal: 400ms;
+            --duration-slow: 600ms;
+            
+            /* 字体大小 */
+            --text-xs: 14px;
+            --text-sm: 16px;
+            --text-base: 17px;
+            --text-lg: 21px;
+            --text-xl: 28px;
+            --text-2xl: 32px;
+            --text-3xl: 48px;
+            --text-4xl: 56px;
+            --text-5xl: 64px;
+        }
+        
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", 
+                         "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", Arial, sans-serif;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            background: var(--color-background);
+            color: var(--color-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* 12列网格系统 */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+        
+        /* 无障碍适配 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .parallax-element {
+                transform: none !important;
+            }
+            
+            .sticky-scale {
+                transform: none !important;
+            }
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: transform var(--duration-fast) var(--ease-apple);
+        }
+        
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+        
+        .navbar-logo {
+            font-size: var(--text-lg);
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+            letter-spacing: -0.015em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        }
+        
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-lg);
+        }
+        
+        .navbar-nav a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-size: var(--text-base);
+            font-weight: 500;
+            letter-spacing: -0.015em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            transition: color var(--duration-fast) var(--ease-apple);
+        }
+        
+        .navbar-nav a:hover {
+            color: var(--color-link);
+        }
+        
+        .navbar-cta {
+            background: var(--color-link);
+            color: var(--color-white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            transition: all var(--duration-fast) var(--ease-apple);
+        }
+        
+        .navbar-cta:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+        }
+        
+        /* Hero 区域 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: var(--spacing-md);
+            opacity: 0;
+            transform: translateY(32px);
+            animation: fadeInUp var(--duration-slow) var(--ease-apple) 0.1s forwards;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        }
+        
+        .hero-subtitle {
+            font-size: var(--text-2xl);
+            font-weight: 500;
+            letter-spacing: -0.015em;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0;
+            transform: translateY(32px);
+            animation: fadeInUp var(--duration-slow) var(--ease-apple) 0.2s forwards;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(32px);
+            animation: fadeInUp var(--duration-slow) var(--ease-apple) 0.3s forwards;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            border-radius: 28px;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-apple);
+            letter-spacing: -0.015em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--color-link);
+            color: var(--color-white);
+        }
+        
+        .btn-primary:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: var(--color-white);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.02);
+        }
+        
+        /* 叙事分屏 - 协调布局 */
+        .narrative-section {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .narrative-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+            align-items: center;
+        }
+        
+        /* 交错布局 */
+        .narrative-content.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .narrative-content.reverse .narrative-text {
+            order: 2;
+        }
+        
+        .narrative-content.reverse .narrative-image {
+            order: 1;
+        }
+        
+        .narrative-text {
+            opacity: 0;
+            transform: translateY(20px);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-light);
+            position: relative;
+        }
+        
+        .narrative-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all var(--duration-slow) var(--ease-apple);
+        }
+        
+        .narrative-title {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-primary);
+            position: relative;
+            letter-spacing: -0.025em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        }
+        
+        .narrative-title::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .narrative-description {
+            font-size: var(--text-lg);
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: -0.015em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        }
+        
+        .narrative-image {
+            position: relative;
+            transform: scale(0.95);
+            opacity: 0.8;
+            transition: all var(--duration-slow) var(--ease-apple);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .narrative-image.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* 影院级段落 */
+        .cinematic-section {
+            height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .cinematic-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 0;
+        }
+        
+        .cinematic-content {
+            text-align: center;
+            color: var(--color-white);
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(32px);
+        }
+        
+        .cinematic-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all var(--duration-slow) var(--ease-apple);
+        }
+        
+        .cinematic-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -0.025em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        }
+        
+        /* FAQ 区域 */
+        .faq-section {
+            padding: var(--spacing-3xl) 0;
+            background: var(--color-white);
+        }
+        
+        .faq-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+            color: var(--color-primary);
+            letter-spacing: -0.025em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(16px);
+        }
+        
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all var(--duration-normal) var(--ease-apple);
+        }
+        
+        .faq-question {
+            padding: var(--spacing-lg) 0;
+            font-size: var(--text-xl);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-primary);
+            letter-spacing: -0.015em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        }
+        
+        .faq-icon {
+            transition: transform var(--duration-fast) var(--ease-apple);
+        }
+        
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--duration-normal) var(--ease-apple);
+        }
+        
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+        }
+        
+        .faq-answer-content {
+            padding-bottom: var(--spacing-lg);
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            font-size: var(--text-lg);
+            font-weight: 400;
+            letter-spacing: -0.015em;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--color-white);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            opacity: 0.8;
+            transition: opacity var(--duration-fast) var(--ease-apple);
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .footer-copyright {
+            font-size: var(--text-xs);
+            opacity: 0.6;
+        }
+        
+        /* 动画定义 */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* 悬浮动画 */
+        .narrative-image:hover {
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        .narrative-text:hover {
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1068px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: var(--text-xl);
+            }
+            
+            .narrative-title {
+                font-size: var(--text-2xl);
+            }
+            
+            .narrative-description {
+                font-size: var(--text-base);
+            }
+            
+            .narrative-content {
+                gap: var(--spacing-lg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: var(--text-lg);
+            }
+            
+            .btn {
+                padding: 14px 28px;
+                font-size: var(--text-base);
+            }
+            
+            .narrative-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+                padding: 0 var(--spacing-md);
+            }
+            
+            .narrative-content.reverse .narrative-text {
+                order: 1;
+            }
+            
+            .narrative-content.reverse .narrative-image {
+                order: 2;
+            }
+            
+            .narrative-text {
+                padding: var(--spacing-md);
+            }
+            
+            .narrative-title {
+                font-size: var(--text-2xl);
+            }
+            
+            .narrative-description {
+                font-size: var(--text-base);
+            }
+            
+            .narrative-image div {
+                max-width: 240px !important;
+                height: 160px !important;
+            }
+            
+            .narrative-image div div[style*="font-size: 18px"] {
+                font-size: 16px !important;
+            }
+            
+            .narrative-image div div[style*="font-size: 16px"] {
+                font-size: 14px !important;
+            }
+            
+            .narrative-image div div[style*="font-size: 15px"] {
+                font-size: 13px !important;
+            }
+            
+            .cinematic-title {
+                font-size: 2rem;
+            }
+            
+            .faq-title {
+                font-size: 2rem;
+            }
+            
+            .faq-question {
+                font-size: var(--text-lg);
+            }
+            
+            .faq-answer-content {
+                font-size: var(--text-base);
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-content">
+            <a href="#" class="navbar-logo">口语练习</a>
+            <ul class="navbar-nav">
+                <li><a href="#features">功能</a></li>
+                <li><a href="#pricing">价格</a></li>
+                <li><a href="#faq">支持</a></li>
+            </ul>
+            <a href="#hero" class="navbar-cta">我要练习</a>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">开口练英语</h1>
+            <p class="hero-subtitle">想学会就要多说话，自己掌控学习节奏</p>
+            <div class="hero-actions">
+                <a href="#features" class="btn btn-primary">开始练口语</a>
+                <a href="#features" class="btn btn-secondary">看练习方法</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 叙事分屏 1：AI实时分析 -->
+    <section class="narrative-section" id="features" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="narrative-content">
+            <div class="narrative-image">
+                <div style="width: 100%; max-width: 280px; height: 200px; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; border: 1px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); animation: shimmer 3s infinite;"></div>
+                    <div style="font-size: 28px; margin-bottom: 16px; z-index: 1;">🎤</div>
+                    <div style="font-size: 18px; text-align: center; opacity: 0.9; z-index: 1; line-height: 1.5; font-weight: 500;">
+                        <div style="margin-bottom: 8px;">✓ 发音准确度: 92%</div>
+                        <div style="margin-bottom: 8px;">✓ 语调自然度: 88%</div>
+                        <div>✓ 流畅度: 95%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="narrative-text" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
+                <h2 class="narrative-title" style="color: #667eea;">想说就说，随时练习</h2>
+                <p class="narrative-description">
+                    口语练习最重要的是开口说话。不管你的发音标不标准，
+                    语法对不对，先说出来再说。
+                </p>
+                <p class="narrative-description" style="margin-top: 16px;">
+                    你可以随时随地练习，想练多久练多久，完全由你自己决定。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 叙事分屏 2：个性化陪练 -->
+    <section class="narrative-section" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+        <div class="narrative-content reverse">
+            <div class="narrative-text" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
+                <h2 class="narrative-title" style="color: #f5576c;">自己掌控练习进度</h2>
+                <p class="narrative-description">
+                    你想练什么就练什么，想从哪里开始就从哪里开始。
+                    日常对话、商务英语、旅游口语...完全由你选择。
+                </p>
+                <p class="narrative-description" style="margin-top: 16px;">
+                    练习的节奏和强度都由你自己决定，没有人催促你，也没有固定的课程表。
+                </p>
+            </div>
+            <div class="narrative-image">
+                <div style="width: 100%; max-width: 280px; height: 200px; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="font-size: 28px; margin-bottom: 16px;">🧠</div>
+                    <div style="font-size: 16px; text-align: center; opacity: 0.9; line-height: 1.6; font-weight: 500;">
+                        <div style="margin-bottom: 12px; font-weight: 600;">我的练习计划</div>
+                        <div style="margin-bottom: 6px;">• 日常对话 (自由选择)</div>
+                        <div style="margin-bottom: 6px;">• 商务英语 (按需练习)</div>
+                        <div>• 旅游口语 (随时开始)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心理念区域 -->
+    <section class="narrative-section" style="background: #fff;">
+        <div class="narrative-content">
+            <div class="narrative-text">
+                <h2 class="narrative-title" style="color: #0071E3;">口语就是要多说多练</h2>
+                <p class="narrative-description" style="font-size: 20px; font-weight: 500; color: #1d1d1f; margin-bottom: 20px;">
+                    说得多了，自然就流利了
+                </p>
+                <p class="narrative-description">
+                    学口语没有捷径，就是要多开口说话。
+                    每天坚持练习，从简单的对话开始，慢慢提升难度。
+                </p>
+            </div>
+            <div class="narrative-image">
+                <div style="width: 100%; max-width: 280px; height: 200px; background: linear-gradient(135deg, #0071E3 0%, #005bb5 100%); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                    <div style="font-size: 32px; margin-bottom: 20px;">🗣️</div>
+                    <div style="font-size: 16px; text-align: center; font-weight: 600; margin-bottom: 16px;">口语练习要点</div>
+                    <div style="font-size: 16px; text-align: center; line-height: 1.6; font-weight: 500;">
+                        <div style="margin-bottom: 8px;">🎯 每天坚持开口</div>
+                        <div style="margin-bottom: 8px;">💡 从简单开始</div>
+                        <div>🚀 逐步提升难度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用方法区域 -->
+    <section class="narrative-section" style="background: #f5f5f7;">
+        <div class="narrative-content">
+            <div class="narrative-image">
+                <div style="width: 100%; max-width: 280px; height: 200px; background: linear-gradient(135deg, #34c759 0%, #30d158 100%); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                    <div style="font-size: 28px; margin-bottom: 16px;">📱</div>
+                    <div style="font-size: 15px; text-align: center; line-height: 1.6; font-weight: 500;">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px; justify-content: center;">
+                            <span style="background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 10px; margin-right: 8px; font-size: 12px; font-weight: 600;">1</span>
+                            <span>选话题开聊</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 8px; justify-content: center;">
+                            <span style="background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 10px; margin-right: 8px; font-size: 12px; font-weight: 600;">2</span>
+                            <span>AI实时打分</span>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center;">
+                            <span style="background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 10px; margin-right: 8px; font-size: 12px; font-weight: 600;">3</span>
+                            <span>越聊越流利</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="narrative-text">
+                <h2 class="narrative-title">这样练习最有效</h2>
+                <div style="margin-top: 24px;">
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 16px;">
+                        <div style="background: #34c759; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 12px; flex-shrink: 0; font-size: 14px;">1</div>
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 6px; color: #1d1d1f;">选择感兴趣的话题</h3>
+                            <p style="color: #86868B; line-height: 1.4; font-size: 16px;">从你熟悉的话题开始：工作、爱好、日常生活</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 16px;">
+                        <div style="background: #34c759; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 12px; flex-shrink: 0; font-size: 14px;">2</div>
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 6px; color: #1d1d1f;">大胆开口说话</h3>
+                            <p style="color: #86868B; line-height: 1.4; font-size: 16px;">不要怕说错，口语练习就是要多说多练</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start;">
+                        <div style="background: #34c759; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 12px; flex-shrink: 0; font-size: 14px;">3</div>
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 6px; color: #1d1d1f;">坚持每天练习</h3>
+                            <p style="color: #86868B; line-height: 1.4; font-size: 16px;">哪怕每天只练10分钟，坚持下去就会看到进步</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 影院级段落 -->
+    <section class="cinematic-section">
+        <div class="cinematic-overlay"></div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #667eea, #764ba2); z-index: -1;"></div>
+        <div class="cinematic-content">
+            <h2 class="cinematic-title">开始你的口语练习之旅</h2>
+            <p style="font-size: 21px; opacity: 0.9; margin-bottom: 32px;">每一次开口都是进步，每一天练习都有收获</p>
+            <a href="#features" class="btn btn-primary" style="font-size: 18px; padding: 16px 32px;">开始练口语</a>
+        </div>
+    </section>
+
+    <!-- FAQ 区域 -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="faq-title">常见问题</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>为什么说要"用英语"而不是"学英语"？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            想想你是怎么学会说中文的？不是背字典，而是天天说话对吧！英语也一样，死记硬背只会让你变成"哑巴英语"。直接用英语聊天、表达想法，这样学到的才是真正能用的英语，不是考试英语。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>如何开始使用AI口语教练？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            超级简单！找个话题直接开始说英语，AI会实时给你反馈，告诉你哪里说得不够地道。每天聊几分钟，英语自然就溜了。记住，犯错不丢人，不开口才丢人！
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>支持哪些语言和口音？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            目前主要支持英语发音训练，包括美式英语和英式英语。我们的AI模型经过大量数据训练，能够准确识别和评估不同口音。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>价格如何？有免费试用吗？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            我们提供免费试用服务，让你体验基础功能。付费版本包含更多高级功能和个性化训练计划，价格合理且物超所值。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>数据安全和隐私如何保障？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            我们严格遵守数据保护法规，所有语音数据都经过加密处理。你的个人信息和学习数据完全安全，不会被第三方获取。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>需要什么设备和环境？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            只需要一台能上网的设备和一个麦克风即可。支持电脑、平板和手机，建议在安静的环境中使用以获得最佳体验效果。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">隐私政策</a>
+                <a href="#">服务条款</a>
+                <a href="#">联系我们</a>
+                <a href="#">帮助中心</a>
+            </div>
+            <div class="footer-copyright">
+                © 2024 AI 口语教练. 保留所有权利.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 全局变量
+        let lastScrollY = 0;
+        let ticking = false;
+        
+        // IntersectionObserver 配置
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        // 创建观察器
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // 导航栏滚动控制
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
+                if (currentScrollY > lastScrollY) {
+                    // 向下滚动 - 隐藏导航栏
+                    navbar.classList.add('hidden');
+                } else {
+                    // 向上滚动 - 显示导航栏
+                    navbar.classList.remove('hidden');
+                }
+            } else {
+                // 顶部区域 - 显示导航栏
+                navbar.classList.remove('hidden');
+            }
+            
+            lastScrollY = currentScrollY;
+            ticking = false;
+        }
+        
+        // 节流滚动事件
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        }
+        
+        // 粘性图片效果
+        function updateStickyImages() {
+            const narrativeSections = document.querySelectorAll('.narrative-section');
+            
+            narrativeSections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const image = section.querySelector('.narrative-image');
+                
+                if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+                    // 在视口中央
+                    image.classList.add('active');
+                } else {
+                    image.classList.remove('active');
+                }
+            });
+        }
+        
+        // FAQ 手风琴效果
+        function initFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('open');
+                    
+                    // 关闭所有其他项目
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('open');
+                        }
+                    });
+                    
+                    // 切换当前项目
+                    if (isOpen) {
+                        item.classList.remove('open');
+                    } else {
+                        item.classList.add('open');
+                    }
+                });
+            });
+        }
+        
+        // 平滑滚动
+        function initSmoothScroll() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80; // 考虑导航栏高度
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // 页面初始化
+        function init() {
+            // 观察需要动画的元素
+            const animatedElements = document.querySelectorAll('.narrative-text, .cinematic-content, .faq-item');
+            animatedElements.forEach(el => observer.observe(el));
+            
+            // 绑定滚动事件
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('scroll', updateStickyImages, { passive: true });
+            
+            // 初始化功能
+            initFAQ();
+            initSmoothScroll();
+            
+            // 初始检查
+            updateStickyImages();
+            
+            console.log('🚀 AI口语教练页面已加载完成');
+        }
+        
+        // DOM 加载完成后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+        
+        // 性能监控
+        window.addEventListener('load', () => {
+            // 检查性能指标
+            if ('performance' in window) {
+                const perfData = performance.getEntriesByType('navigation')[0];
+                console.log(`⚡ 页面加载时间: ${Math.round(perfData.loadEventEnd - perfData.fetchStart)}ms`);
+            }
+        });
+    </script>
+</body>
+</html>
